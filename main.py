@@ -21,26 +21,8 @@ finally:
 log.info(f'WordCloud stop words loaded total {len(stop_words)} words')
 
 async def any_talk(data: Message):
-    return True,0
-
-class WordCloudPluginInstance(PluginInstance):
-    def install(self):
-        if not os.path.exists(f'{curr_dir}/../../resource/word_cloud'):
-            os.makedirs(f'{curr_dir}/../../resource/word_cloud')
-
-bot = WordCloudPluginInstance(
-    name='词云统计',
-    version='1.0',
-    plugin_id='amiyabot-hsyhhssyy-wordcloud',
-    plugin_type='official',
-    description='让兔兔可以统计群用户的词云',
-    document=f'{curr_dir}/README.md'
-)
-
-@bot.on_message(verify=any_talk, check_prefix=False)
-async def _(data: Message):
-
-    log.info('AnyTalk Collect Word Cloud')
+    
+    # log.info('AnyTalk Collect Word Cloud')
 
     #收集好分词后的群友句子
     words = data.text_words
@@ -70,6 +52,24 @@ async def _(data: Message):
 
     conn.commit()
 
+    return False,0
+
+class WordCloudPluginInstance(PluginInstance):
+    def install(self):
+        if not os.path.exists(f'{curr_dir}/../../resource/word_cloud'):
+            os.makedirs(f'{curr_dir}/../../resource/word_cloud')
+
+bot = WordCloudPluginInstance(
+    name='词云统计',
+    version='1.0',
+    plugin_id='amiyabot-hsyhhssyy-wordcloud',
+    plugin_type='official',
+    description='让兔兔可以统计群用户的词云',
+    document=f'{curr_dir}/README.md'
+)
+
+@bot.on_message(verify=any_talk, check_prefix=False)
+async def _(data: Message):
     return
 
 @bot.on_message(keywords=['查看词云','查询词云'], level = 5)
