@@ -3,8 +3,13 @@ import sqlite3
 import os
 import re
 
-from wordcloud import WordCloud
 from amiyabot import AmiyaBot, Message, Chain, log , PluginInstance
+
+try:
+    from wordcloud import WordCloud
+    enabled = True
+except ModuleNotFoundError:
+    enabled = False
 
 curr_dir = os.path.dirname(__file__)
 
@@ -61,9 +66,9 @@ class WordCloudPluginInstance(PluginInstance):
 
 bot = WordCloudPluginInstance(
     name='词云统计',
-    version='1.0',
+    version='1.1',
     plugin_id='amiyabot-hsyhhssyy-wordcloud',
-    plugin_type='official',
+    plugin_type='',
     description='让兔兔可以统计群用户的词云',
     document=f'{curr_dir}/README.md'
 )
@@ -77,9 +82,12 @@ async def check_wordcloud(data: Message):
 
     # log.info('Create Word Cloud')
 
-    if not os.path.exists(f'{curr_dir}/../../resource/word_cloud.db'):
-        return Chain(data).text('词云功能没有开放。')
+    if not os.path.exists(f'{curr_dir}/../../resource/word_cloud.db') :
+        return Chain(data).text('兔兔的词云功能没有开放哦。')
     
+    if not enabled :
+        return Chain(data).text('兔兔目前还不会绘制词云图片，请管理员安装对应依赖。')
+
     user_id = data.user_id
 
     conn = sqlite3.connect(f'{curr_dir}/../../resource/word_cloud.db')
