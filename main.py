@@ -15,7 +15,7 @@ curr_dir = os.path.dirname(__file__)
 
 #初始化停用词
 stop_words = []
-file_object2 = open(f"{curr_dir}/resource/word_cloud_stop_words_cn.txt",'r')
+file_object2 = open(f"{curr_dir}/resource/word_cloud_stop_words_cn.txt",'r', encoding='utf-8', errors='ignore')
 try:
     lines = file_object2.readlines()
     for line in lines:
@@ -66,7 +66,7 @@ class WordCloudPluginInstance(PluginInstance):
 
 bot = WordCloudPluginInstance(
     name='词云统计',
-    version='1.1',
+    version='1.2',
     plugin_id='amiyabot-hsyhhssyy-wordcloud',
     plugin_type='',
     description='让兔兔可以统计群用户的词云',
