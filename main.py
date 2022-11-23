@@ -16,8 +16,7 @@ def load_by_support():
         sys.path.append(sitePackagePath)
         from wordcloud import WordCloud
         enabled = True
-    except ModuleNotFoundError:
-    except FileNotFoundError:
+    except:
         log.info('无法加载wordcloud依赖，如果您是代码部署，请执行pip install wordcloud，如果您是可执行文件部署，请根据插件说明中的内容执行对应操作。')
         enabled = False
 
