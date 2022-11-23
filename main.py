@@ -2,16 +2,30 @@ import asyncio
 import sqlite3
 import os
 import re
+import sys
 
 from amiyabot import AmiyaBot, Message, Chain, log , PluginInstance
+from core.util import read_yaml
+
+curr_dir = os.path.dirname(__file__)
+
+def load_by_support():
+    try:
+        python_support = read_yaml(f'{curr_dir}/../../resource/python_support.yaml')
+        sitePackagePath = python_support.sitePackagePath
+        sys.path.append(sitePackagePath)
+        from wordcloud import WordCloud
+        enabled = True
+    except ModuleNotFoundError:
+    except FileNotFoundError:
+        log.info('无法加载wordcloud依赖，如果您是代码部署，请执行pip install wordcloud，如果您是可执行文件部署，请根据插件说明中的内容执行对应操作。')
+        enabled = False
 
 try:
     from wordcloud import WordCloud
     enabled = True
 except ModuleNotFoundError:
-    enabled = False
-
-curr_dir = os.path.dirname(__file__)
+    load_by_support()
 
 #初始化停用词
 stop_words = []
@@ -66,10 +80,10 @@ class WordCloudPluginInstance(PluginInstance):
 
 bot = WordCloudPluginInstance(
     name='词云统计',
-    version='1.3',
+    version='1.4',
     plugin_id='amiyabot-hsyhhssyy-wordcloud',
     plugin_type='',
-    description='让兔兔可以统计群用户的词云',
+    description='让兔兔可以统计群用户的词云，（1.4版本开始新增对可执行文件部署用户的有限支持）',
     document=f'{curr_dir}/README.md'
 )
 
