@@ -36,6 +36,14 @@ try:
 finally:
     file_object2.close()
 
+file_object2 = open(f"{curr_dir}/resource/word_cloud_stop_words_custom.txt",'r', encoding='utf-8')
+try:
+    lines = file_object2.readlines()
+    for line in lines:
+        stop_words.append(line.strip())
+finally:
+    file_object2.close()
+
 log.info(f'WordCloud stop words loaded total {len(stop_words)} words')
 
 async def any_talk(data: Message):
@@ -79,10 +87,10 @@ class WordCloudPluginInstance(PluginInstance):
 
 bot = WordCloudPluginInstance(
     name='词云统计',
-    version='1.4',
+    version='1.5',
     plugin_id='amiyabot-hsyhhssyy-wordcloud',
     plugin_type='',
-    description='让兔兔可以统计群用户的词云，（1.4版本开始新增对可执行文件部署用户的有限支持）',
+    description='让兔兔可以统计群用户的词云。1.4版开始对可执行文件部署用户提供支持。',
     document=f'{curr_dir}/README.md'
 )
 
