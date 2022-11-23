@@ -15,7 +15,7 @@ curr_dir = os.path.dirname(__file__)
 
 #初始化停用词
 stop_words = []
-file_object2 = open(f"{curr_dir}/resource/word_cloud_stop_words_cn.txt",'r', encoding='utf-8', errors='ignore')
+file_object2 = open(f"{curr_dir}/resource/word_cloud_stop_words_cn.txt",'r', encoding='utf-8')
 try:
     lines = file_object2.readlines()
     for line in lines:
@@ -103,7 +103,7 @@ async def check_wordcloud(data: Message):
         return Chain(data).text('还没有收集到您的记录，请让我多听一会儿。')
 
     # wordcloud = WordCloud(font_path =  "fileStorage/GenJyuuGothic-Normal-2.ttf").generate_from_frequencies(frequencies)    
-    wordcloud = WordCloud(font_path =  f'{curr_dir}/resource/msyh.ttf').generate_from_frequencies(frequencies)
+    wordcloud = WordCloud(font_path =  f'{curr_dir}/resource/msyh.ttf',background_color='white').generate_from_frequencies(frequencies)
     wordcloud.to_file(f'{curr_dir}/../../resource/word_cloud/word_cloud_{data.user_id}.jpg')
 
     return Chain(data).text('你的词云是：').image(f'{curr_dir}/../../resource/word_cloud/word_cloud_{data.user_id}.jpg')
