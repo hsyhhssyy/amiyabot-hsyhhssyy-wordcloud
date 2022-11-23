@@ -66,7 +66,7 @@ class WordCloudPluginInstance(PluginInstance):
 
 bot = WordCloudPluginInstance(
     name='词云统计',
-    version='1.2',
+    version='1.3',
     plugin_id='amiyabot-hsyhhssyy-wordcloud',
     plugin_type='',
     description='让兔兔可以统计群用户的词云',
