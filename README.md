@@ -46,6 +46,8 @@
 
 > [遇到问题可以在这里反馈(Github)](https://github.com/hsyhhssyy/amiyabot-hsyhhssyy-wordcloud/issues/new/)
 
+> [如果上面的连接无法打开可以在这里反馈(Gitee)](https://gitee.com/hsyhhssyy/amiyabot-plugin-bug-report/issues/new)
+
 > [Logo作者:Sesern老师](https://space.bilibili.com/305550122)
 
 |  版本   | 变更  |
